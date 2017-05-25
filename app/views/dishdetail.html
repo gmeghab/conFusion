@@ -1,0 +1,37 @@
+<body>
+
+    <div class="container">
+            <div class="row row-content" ng-controller="dishDetailController as dishCtrl">
+            <div class="col-xs-12">
+               
+                <ul class="media-list">
+                   <li class="media">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail"
+                         ng-src={{dishCtrl.dish.image}} alt="Uthappizza">
+                        </a>
+                    </div>
+                           
+                    <div class="media-body">
+                        <h2 class="media-heading">{{dishCtrl.dish.name}}
+                         <span class="label label-danger">{{dishCtrl.dish.label}}</span>
+                         <span class="badge">{{dishCtrl.dish.price | currency}}</span></h2>
+                        <p>{{dishCtrl.dish.description}}</p>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9 col-xs-offset-1">
+                <p>Customer Comments &nbsp; &nbsp; <small> Sort by: </small>
+                               <input type="text" ng-model="orderByOption"></p>
+                       <class="media" ng-repeat="comment in dishCtrl.dish.comments | orderBy: orderByOption">
+                        <blockquote>
+                            <p>{{comment.rating}} stars</p>
+                            <p>{{comment.comment}}</p>
+                            <p><small>{{comment.author}}, {{comment.date | date}}</small></p> 
+                        </blockquote>
+                        </class>
+            </div>
+            </div>
+    </div>
