@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+    <html lang="en" ng-app="ProgrammingConcentrationApp">
+<head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head
+         content must come *after* these tags -->
+    <title>Ristorante Con Fusion: Menu</title>
+        <!-- Bootstrap -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+    <link href="styles/mystyles.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row row-content" ng-controller="menuController as menuCtrl">
+           
+                        
+            <div class="col-xs-12">
+                <div class="tab-content">
+               <ul class="media-list tab-pane fade in active">
+               <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation"
+                     ng-class="{active:menuCtrl.isSelected(1)}">
+                    <a ng-click="menuCtrl.select(1)"
+                     aria-controls="all menu"
+                     role="tab">The Degree</a></li>
+                    <li role="presentation"
+                     ng-class="{active:menuCtrl.isSelected(2)}">
+                    <a ng-click="menuCtrl.select(2)"
+                     aria-controls="core"
+                     role="tab">Core</a></li>
+                    <li role="presentation"
+                     ng-class="{active:menuCtrl.isSelected(3)}">
+                    <a ng-click="menuCtrl.select(3)"
+                     aria-controls="programming concentration"
+                     role="tab">Concentration</a></li>
+                    <li role="presentation"
+                     ng-class="{active:menuCtrl.isSelected(4)}">
+                    <a  ng-click="menuCtrl.select(4)"
+                     aria-controls="electives"
+                     role="tab">Electives</a></li>
+                </ul>
+                    </ul>
+                </div>
+               <ul class="media-list">
+                   <li class="media" ng-repeat="course in menuCtrl.courses | filter:menuCtrl.filtText">
+                    <div class="media-left media-middle">
+                        <a href="#">
+                        <img class="media-object img-thumbnail"
+                         ng-src={{course.image}} alt="Uthappizza">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h2 class="media-heading">{{course.name}}
+                         <span class="label label-danger">{{course.label}}</span>
+                         <span class="badge">{{course.certification }}</span></h2>
+                        <p>{{course.description}}</p>
+                    
+                    </div>
+                </li>
+            </ul> 
+            </div>
+
+            </div>
+
+            </div>
+<script src="../bower_components/angular/angular.min.js"></script>
+<script>
+        var app = angular.module('ProgrammingConcentrationApp',[]);
+app.controller('menuController', function() {
+   this.tab=1;
+    this.filtText='';
+    var courses=[
+                         {
+                           name:'CITC1300',
+                           image: 'images/uthapizza.png',
+                           category: 'Core',
+                           label:'MFC',
+                           certification:'N/A',
+                           description:'A beginning course in HTML that provides instruction in creating Web pages. Students learn to write HTML code. Topics include using HTML tags, CSS formatting, and appropriate scripting languages.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1301',
+                           image: 'images/uthapizza.png',
+                           category: 'Core',
+                           label:'MFC',
+                           certification:'N/A',
+                           description:'This course is an introduction to the logic necessary for application programming. Topics include logic analysis, techniques of structured design, process flow, and object oriented concepts.  A programming language will be used to teach data types, variables, control structures, methods and arrays.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1302',
+                           image: 'images/uthapizza.png',
+                           category: 'Core',
+                           label:'MFC',
+                           certification:'CompTIA NET+',
+                           description:'A broad-based course that provides an overview of computer networking. Topics will include network models, protocols and services, media and topologies, devices and tools, network management, and network security. This course may align with the outcomes of industry certification.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1303',
+                           image: 'images/uthapizza.png',
+                           category: 'Core',
+                           label:'MFC',
+                           certification:'Oracle 12g',
+                           description:'An introduction to the concepts and syntax of relational database management systems. Topics include data modeling, database design concepts, tables and queries and other database objects using the tools provided in a relational DBMS.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC2399',
+                           image: 'images/uthapizza.png',
+                           category: 'Core',
+                           label:'MFC',
+                           certification:'N/A',
+                           description:'This course can be either a field experience such as an internship, or a project-based course.  The description will vary among institutions.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1310',
+                           image: 'images/zucchipakoda.png',
+                           category: 'Programming Concentration',
+                           label:'PROCON',
+                           certification:'N/A',
+                           description:'This course introduces the basic concepts of programming, problem solving, programming logic, and design techniques using an object-oriented language. The topics covered include the language syntax, functions, return types, and objects found in a current object-oriented programming language.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1311',
+                           image: 'images/vadonut.png',
+                           category: 'Programming Concentration',
+                           label:'PROCON',
+                           certification:'N/A',
+                           description:'A continuation of CITC 1310 Programming I. This course introduces the student to object oriented programing. Topics include class creation, methods, events, inheritance, objects and error handling. ',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1312',
+                           image: 'images/vadonut.png',
+                           category: 'Programming Concentration',
+                           label:'PROCON',
+                           certification:'N/A',
+                           description:'An introductory study of object-oriented programming through the use and practical application of the language. Topics include classes, objects, methods, GUI programming, graphics, databases, XML, Web pages and Internet.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC1318',
+                           image: 'images/vadonut.png',
+                           category: 'Programming Concentration',
+                           label:'PROCON',
+                           certification:'Java OCA',
+                           description:'This course covers the basic fundamental principles of Data Structures. It uses a programming language to implement a variety of data structures. Topics will include recursion, containers, vectors, pointers, dynamic memory, stacks, queues, and Lists with or without iterators. User Designed classes are implemented.',
+                           comment: ''
+                        },
+                         {
+                           name:'WEBT2300',
+                           image: 'images/vadonut.png',
+                           category: 'Programming Concentration',
+                           label:'PROCON',
+                           certification:'N/A',
+                           description:'This course teaches web developers how to use the features of a scripting language to design client-side, platform-independent solutions. Students learn to write client-side programs, control program flow, validate forms, and work with dynamic content and styles.',
+                           comment: ''
+                        },
+                         {
+                           name:'INFS 1010',
+                           image: 'images/elaicheesecake.png',
+                           category: 'Elective',
+                           label:'ELE',
+                           certification:'MOS',
+                           description:'Computer Applications is an examination of the development of computing technology and terminology. Topics include: identification of the functional components of a computer system; using word processing, spreadsheet, and presentation graphics; the proper handling of computer media; and an exploration of the uses of electronic mail and graphical Internet.',
+                           comment: ''
+                        },
+                         {
+                           name:'CITC 1321',
+                           image: 'images/elaicheesecake.png',
+                           category: 'Elective',
+                           label:'ELE',
+                           certification:'CompTIA A+',
+                           description:'An introduction to basics of computer hardware. Topics include identification and installation of internal components, disk configuration, ports, cables, peripherals and networking concepts and connections. ',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC 1333',
+                           image: 'images/elaicheesecake.png',
+                           category: 'Elective',
+                           label:'ELE',
+                           certification:'LPIC-1 Linux 101 & 102',
+                           description:'This course prepare the student to complete the LPIC-1 Junior Level Linux Certification exams 101 and 102. . Topics will include Linux command line operation, maintenance tasks within Linux, and installation, configuration, and connectivity of Linux workstations.',
+                           comment: ''
+                        },
+                         {
+                           name:'CITC 2326',
+                           image: 'images/elaicheesecake.png',
+                           category: 'Elective',
+                           label:'ELE',
+                           certification:'CompTIA Sec+',
+                           description:'This course is designed to give students a fundamental understanding of computer and network security. It will introduce students to a wide variety of concepts related to computer security. This course will cover the objectives for the CompTIA Security+ Certification.',
+                           comment: ''
+                        },
+                        {
+                           name:'CITC 2344',
+                           image: 'images/elaicheesecake.png',
+                           category: 'Elective',
+                           label:'ELE',
+                           certification:'Oracle SQL',
+                           description:'A comprehensive study of SQL using an industry established relational database management system such as Microsoft SQL Server or Oracle RDBMS.',
+                           comment: ''
+                        }
+                        ];                
+            this.courses=courses;  
+    
+     this.select = function(setTab) {
+                this.tab = setTab;
+
+                if (setTab === 2)
+                    this.filtText = "core";
+                else if (setTab === 3)
+                    this.filtText = "programming concentration";
+                else if (setTab === 4)
+                    this.filtText = "elective";
+                else
+                    this.filtText = "";
+            }
+
+   this.isSelected = function (checkTab) {
+                return (this.tab === checkTab);}
+    });
+    
+    </script>
+
+</body>
+
+</html>
